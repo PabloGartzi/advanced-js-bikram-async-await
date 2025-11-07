@@ -141,11 +141,25 @@ const getRandomPokemonImage = async () => {
 /*Declara una función printPugVsPikachu que pinte la batalla entre "Pug" y "Pikachu" (no se testea)*/
 const printPugVsPikachu = async () => {
     try {
-    } catch (error) {
+        const pugImg = await getRandomDogImage();
+        const pikachuData = await connect("https://pokeapi.co/api/v2/pokemon/pikachu");
+        const pikachuName = pikachuData.name;
+        const pikachuImg = pikachuData.sprites.front_default;
+        
+        const hp = pikachuData.stats.find(stats => stats.stat.name == "hp").base_stat;
+        const attack = pikachuData.stats.find(stats => stats.stat.name == "attack").base_stat;
+
+        //se me ha ocurrido darle stats al perro con math.random()
+        const pugPower = Math.floor(Math.random() * 100);
+        const pikachuPower = attack + Math.floor(Math.random() * 50);
+        const winner = pugPower > pikachuPower ? "Pug" : "Pikachu";
+        console.log(winner);
+    } 
+    catch (error) {
         throw console.log("ERROR");
     }
 }
-
+printPugVsPikachu();
 //EJERCICIO 7
 /*Declara una función getRandomCharacter que retorne un personaje aleatorio.*/
 /**
